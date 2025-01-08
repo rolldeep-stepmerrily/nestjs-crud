@@ -4,6 +4,7 @@ import { ConfigModule } from '@nestjs/config';
 import Joi from 'joi';
 
 import { AppController } from './app.controller';
+import { AuthModule } from './auth/auth.module';
 import { HttpLoggerMiddleware } from './common/middlewares';
 import { PrismaModule } from './prisma/prisma.module';
 import { UsersModule } from './users/users.module';
@@ -19,6 +20,7 @@ import { UsersModule } from './users/users.module';
         POSTGRES_PASSWORD: Joi.string().required(),
         POSTGRES_DB: Joi.string().required(),
         DATABASE_URL: Joi.string().required(),
+        JWT_SECRET_KEY: Joi.string().required(),
       }),
       isGlobal: true,
       envFilePath: '.env',
@@ -26,6 +28,7 @@ import { UsersModule } from './users/users.module';
     }),
     PrismaModule,
     UsersModule,
+    AuthModule,
   ],
   controllers: [AppController],
 })

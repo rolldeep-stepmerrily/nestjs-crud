@@ -7,12 +7,47 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum ERole {
+  USER
+  ADMIN
+}
+
 model User {
   id        Int       @id @default(autoincrement())
   username  String    @unique
   email     String    @unique
   password  String
+  role      ERole     @default(USER)
   createdAt DateTime  @default(now())
   updatedAt DateTime? @updatedAt
   deletedAt DateTime?
+
+  Post      Post[]
+  Comment   Comment[]
+}
+
+model Post {
+  id        Int       @id @default(autoincrement())
+  authorId  Int
+  title     String
+  content   String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt
+  deletedAt DateTime?
+
+  author   User      @relation(fields: [authorId], references: [id])
+  comments Comment[]
+}
+
+model Comment {
+  id        Int       @id @default(autoincrement())
+  postId    Int
+  authorId  Int
+  content   String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt
+  deletedAt DateTime?
+
+  post   Post @relation(fields: [postId], references: [id])
+  author User @relation(fields: [authorId], references: [id])
 }

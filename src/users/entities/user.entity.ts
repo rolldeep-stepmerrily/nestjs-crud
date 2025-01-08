@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-import { User as UserModel } from '@prisma/client';
-import { IsEmail, IsPositive, Matches } from 'class-validator';
+import { User as UserModel, ERole } from '@prisma/client';
+import { IsEmail, IsEnum, IsPositive, Matches } from 'class-validator';
 
 import { BaseEntity } from '@@entities';
 
@@ -23,4 +23,8 @@ export class UserEntity extends BaseEntity implements UserModel {
   @ApiProperty({ description: 'User password', required: true, example: 'qwer1234!' })
   @Matches(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[`~!@#$%^&*()_=+])[A-Za-z\d`~!@#$%^&*()_=+]{8,16}$/)
   password: string;
+
+  @ApiProperty({ description: 'User role', required: true, example: ERole.USER })
+  @IsEnum(ERole)
+  role: ERole;
 }

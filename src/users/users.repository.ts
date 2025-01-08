@@ -19,8 +19,18 @@ export class UsersRepository {
     return await this.prisma.user.findUnique({ where: { username }, select: { id: true } });
   }
 
+  async findUserByUsernameForSignIn(username: string) {
+    return await this.prisma.user.findUnique({
+      where: { username },
+      select: { id: true, password: true, deletedAt: true },
+    });
+  }
+
   async findUsers() {
-    return await this.prisma.user.findMany({ where: { deletedAt: null }, select: { id: true, username: true } });
+    return await this.prisma.user.findMany({
+      where: { deletedAt: null },
+      select: { id: true, username: true, role: true, createdAt: true },
+    });
   }
 
   async createUser(createUserRequestDto: CreateUserRequestDto) {
