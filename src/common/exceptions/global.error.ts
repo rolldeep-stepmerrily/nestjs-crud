@@ -1,10 +1,10 @@
 import { HttpStatus } from '@nestjs/common';
 
 export const GLOBAL_ERRORS = {
-  VERSION_LOG_NOT_FOUND: {
+  CHANGELOG_NOT_FOUND: {
     statusCode: HttpStatus.NOT_FOUND,
-    errorCode: 'VERSION_LOG_NOT_FOUND',
-    message: 'Cannot GET /version-log',
+    errorCode: 'CHANGELOG_NOT_FOUND',
+    message: 'Cannot GET /changelog',
   },
   INVALID_POSITIVE_INT: {
     statusCode: HttpStatus.BAD_REQUEST,
@@ -14,11 +14,11 @@ export const GLOBAL_ERRORS = {
   UNKNOWN_ERROR: {
     statusCode: HttpStatus.INTERNAL_SERVER_ERROR,
     errorCode: 'UNKNOWN_ERROR',
-    message: '알 수 없는 에러가 발생하였습니다.',
+    message: 'Unknown error',
   },
   DATABASE_ERROR: {
     statusCode: HttpStatus.INTERNAL_SERVER_ERROR,
     errorCode: 'DATABASE_ERROR',
-    message: '데이터베이스 에러가 발생하였습니다.',
+    message: 'Database error',
   },
 };

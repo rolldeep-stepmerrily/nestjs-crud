@@ -13,7 +13,6 @@ export class HttpExceptionFilter implements ExceptionFilter {
   catch(exception: HttpException, host: ArgumentsHost) {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse<Response>();
-    const request = ctx.getRequest();
     const statusCode = exception.getStatus();
     const exceptionResponse = exception.getResponse();
 
@@ -39,12 +38,6 @@ export class HttpExceptionFilter implements ExceptionFilter {
 
     const message = isUnAuthorized ? 'Unauthorized key' : error.message || 'UNDEFINED_ERROR_MESSAGE';
 
-    return response.status(statusCode).json({
-      statusCode,
-      errorCode,
-      message,
-      timestamp: new Date().toISOString(),
-      path: request.url,
-    });
+    return response.status(statusCode).json({ statusCode, errorCode, message, timestamp: new Date().toISOString() });
   }
 }

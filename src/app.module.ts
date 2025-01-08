@@ -4,9 +4,9 @@ import { ConfigModule } from '@nestjs/config';
 import Joi from 'joi';
 
 import { AppController } from './app.controller';
-import { ConfigProviderModule } from './common/config-provider';
 import { HttpLoggerMiddleware } from './common/middlewares';
 import { PrismaModule } from './prisma/prisma.module';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
@@ -15,18 +15,17 @@ import { PrismaModule } from './prisma/prisma.module';
         SERVER_URL: Joi.string().required(),
         NODE_ENV: Joi.string().valid('development', 'production').default('development'),
         PORT: Joi.number().default(3000),
+        POSTGRES_USER: Joi.string().required(),
+        POSTGRES_PASSWORD: Joi.string().required(),
+        POSTGRES_DB: Joi.string().required(),
         DATABASE_URL: Joi.string().required(),
-        ADMIN_NAME: Joi.string().required(),
-        ADMIN_PASSWORD: Joi.string().required(),
-        GUEST_NAME: Joi.string().required(),
-        GUEST_PASSWORD: Joi.string().required(),
       }),
       isGlobal: true,
       envFilePath: '.env',
       validationOptions: { abortEarly: true },
     }),
     PrismaModule,
-    ConfigProviderModule,
+    UsersModule,
   ],
   controllers: [AppController],
 })
