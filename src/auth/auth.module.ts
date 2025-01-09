@@ -2,16 +2,16 @@ import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 
+import { MailerModule } from 'src/mailer/mailer.module';
 import { RedisModule } from 'src/redis/redis.module';
 import { UsersModule } from 'src/users/users.module';
 
 import { AuthController } from './auth.controller';
-import { AuthService } from './auth.service';
+import { AuthenticationService, RegistrationService, ValidationService, VerificationService } from './services';
 
 @Module({
-  imports: [JwtModule, PassportModule, UsersModule, RedisModule],
+  imports: [MailerModule, JwtModule, PassportModule, UsersModule, RedisModule],
   controllers: [AuthController],
-  providers: [AuthService],
-  exports: [AuthService],
+  providers: [AuthenticationService, RegistrationService, ValidationService, VerificationService],
 })
 export class AuthModule {}

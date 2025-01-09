@@ -17,6 +17,8 @@ import { TransformInterceptor } from './common/interceptors';
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
+  app.setGlobalPrefix('api');
+
   const configService = app.get(ConfigService);
 
   const nodeEnv = configService.getOrThrow<string>('NODE_ENV');

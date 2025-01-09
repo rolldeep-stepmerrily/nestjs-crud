@@ -13,7 +13,7 @@ export class AppController {
   constructor(private readonly configService: ConfigService) {}
 
   @Get('changelog')
-  async changelog(): Promise<string> {
+  async changelog() {
     if (this.configService.getOrThrow<string>('NODE_ENV') !== 'development') {
       throw new CustomHttpException(GLOBAL_ERRORS.CHANGELOG_NOT_FOUND);
     }

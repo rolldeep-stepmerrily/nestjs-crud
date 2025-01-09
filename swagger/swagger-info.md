@@ -2,7 +2,7 @@
 
 ### 📚 Version Information
 
-Current Version: 1.0.0
+Current Version: 1.0.1
 
 For more detailed version history, please refer to [Changelog](/changelog).
 
