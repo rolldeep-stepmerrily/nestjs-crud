@@ -7,6 +7,7 @@ import { AppController } from './app.controller';
 import { AuthModule } from './auth/auth.module';
 import { HttpLoggerMiddleware } from './common/middlewares';
 import { PrismaModule } from './prisma/prisma.module';
+import { RedisModule } from './redis/redis.module';
 import { UsersModule } from './users/users.module';
 
 @Module({
@@ -21,12 +22,16 @@ import { UsersModule } from './users/users.module';
         POSTGRES_DB: Joi.string().required(),
         DATABASE_URL: Joi.string().required(),
         JWT_SECRET_KEY: Joi.string().required(),
+        REDIS_HOST: Joi.string().required(),
+        REDIS_PORT: Joi.number().required(),
+        REDIS_PASSWORD: Joi.string().required(),
       }),
       isGlobal: true,
       envFilePath: '.env',
       validationOptions: { abortEarly: true },
     }),
     PrismaModule,
+    RedisModule,
     UsersModule,
     AuthModule,
   ],

@@ -17,7 +17,6 @@ export class AuthService {
   constructor(
     private readonly configService: ConfigService,
     private readonly jwtService: JwtService,
-
     private readonly usersRepository: UsersRepository,
   ) {}
 

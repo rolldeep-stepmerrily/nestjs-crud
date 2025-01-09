@@ -30,10 +30,12 @@
     "dayjs": "^1.11.13",
     "express-basic-auth": "^1.2.1",
     "helmet": "^7.1.0",
+    "ioredis": "^5.4.2",
     "joi": "^17.13.3",
     "nestjs-swagger-api-exception-response": "^1.0.0",
     "passport": "^0.7.0",
     "passport-jwt": "^4.0.1",
+    "redis": "^4.7.0",
     "reflect-metadata": "^0.2.0",
     "rxjs": "^7.8.1"
   },
