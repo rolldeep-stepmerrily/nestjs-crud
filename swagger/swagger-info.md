@@ -4,7 +4,7 @@
 
 Current Version: 1.0.1
 
-For more detailed version history, please refer to [Changelog](/changelog).
+For more detailed version history, please refer to [Changelog](/api/changelog).
 
 ---
 
