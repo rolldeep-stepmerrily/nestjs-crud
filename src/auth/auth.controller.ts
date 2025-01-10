@@ -63,6 +63,7 @@ export class AuthController {
 
   @ApiOperation({ summary: 'Sign up' })
   @ApiResponse({ status: HttpStatus.CREATED, type: SignUpResponseDto })
+  @ApiExceptionResponse(HttpStatus.BAD_REQUEST, [AuthError.NOT_VERIFIED_EMAIL])
   @ApiExceptionResponse(HttpStatus.CONFLICT, [AuthError.DUPLICATED_USERNAME, AuthError.DUPLICATED_EMAIL])
   @Post('sign-up')
   async signUp(@Body() signUpRequestDto: SignUpRequestDto) {

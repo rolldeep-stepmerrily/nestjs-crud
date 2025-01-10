@@ -13,12 +13,18 @@ export class RedisRepository {
     this.#redisClient = new Redis(redisConfig(configService));
   }
 
-  async get(key: string) {
-    return await this.#redisClient.get(key);
+  async get<T>(key: string) {
+    const value = await this.#redisClient.get(key);
+
+    if (!value) {
+      return null;
+    }
+
+    return JSON.parse(value) as T;
   }
 
-  async set(key: string, value: string, ttl: number) {
-    await this.#redisClient.set(key, value, 'EX', ttl);
+  async set(key: string, value: any, ttl: number) {
+    await this.#redisClient.set(key, JSON.stringify(value), 'EX', ttl);
   }
 
   async del(key: string) {

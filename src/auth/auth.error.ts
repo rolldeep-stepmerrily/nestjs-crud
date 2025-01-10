@@ -33,7 +33,17 @@ export const AuthError = {
   },
   INVALID_VERIFICATION_CODE: {
     errorCode: 'INVALID_VERIFICATION_CODE',
-    statusCode: HttpStatus.BAD_REQUEST,
+    statusCode: HttpStatus.UNAUTHORIZED,
     message: 'Invalid verification code',
+  },
+  NOT_VERIFIED_EMAIL: {
+    errorCode: 'NOT_VERIFIED_EMAIL',
+    statusCode: HttpStatus.BAD_REQUEST,
+    message: 'Not verified email',
+  },
+  FAILED_TO_CREATE_USER: {
+    errorCode: 'FAILED_TO_CREATE_USER',
+    statusCode: HttpStatus.INTERNAL_SERVER_ERROR,
+    message: 'Failed to create user, please try again later',
   },
 };
