@@ -11,7 +11,7 @@ export class CheckUsernameDuplicationRequestDto extends PickType(UserEntity, ['u
 export class SendEmailVerificationCodeRequestDto extends PickType(UserEntity, ['email'] as const) {}
 
 export class VerifyEmailVerificationCodeRequestDto extends PickType(UserEntity, ['email'] as const) {
-  @ApiProperty({ description: '6자리 숫자 인증 코드' })
+  @ApiProperty({ description: '6-digit code', example: '012345' })
   @IsString()
   @Length(6, 6)
   @Matches(/^[0-9]+$/)

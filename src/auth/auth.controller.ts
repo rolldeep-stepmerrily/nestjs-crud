@@ -1,7 +1,9 @@
-import { Body, Controller, Get, HttpCode, HttpStatus, Post, Query } from '@nestjs/common';
-import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { Body, Controller, Get, HttpCode, HttpStatus, Post, Query, UseGuards } from '@nestjs/common';
+import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 import { ApiExceptionResponse } from 'nestjs-swagger-api-exception-response';
+
+import { NoAuthGuard } from 'src/common/guards';
 
 import { AuthError } from './auth.error';
 import {
@@ -16,6 +18,8 @@ import { SignInResponseDto, SignUpResponseDto } from './dto/auth.response.dto';
 import { AuthenticationService, RegistrationService, ValidationService, VerificationService } from './services';
 
 @ApiTags('Auth')
+@ApiBearerAuth('accessToken')
+@UseGuards(NoAuthGuard)
 @Controller('auth')
 export class AuthController {
   constructor(
