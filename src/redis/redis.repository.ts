@@ -3,14 +3,16 @@ import { ConfigService } from '@nestjs/config';
 
 import Redis from 'ioredis';
 
-import { redisConfig } from './redis.config';
-
 @Injectable()
 export class RedisRepository {
   #redisClient: Redis;
 
   constructor(configService: ConfigService) {
-    this.#redisClient = new Redis(redisConfig(configService));
+    this.#redisClient = new Redis({
+      host: configService.getOrThrow('REDIS_HOST'),
+      port: configService.getOrThrow('REDIS_PORT'),
+      password: configService.getOrThrow('REDIS_PASSWORD'),
+    });
   }
 
   async get<T>(key: string) {
